@@ -26,18 +26,18 @@
     <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/header-colors.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/my-style.css') }}" />
-    <title>TDQ - Trang quản trị </title>
+    <title>ELý - Trang quản trị </title>
 </head>
 
 <body>
 
-    @if(Session::has('success'))
+    {{-- @if(Session::has('success'))
         <div class="general-message alert alert-info">{{ Session::get('success') }}</div>
     @endif
 
     @if(Session::has('error'))
         <div class="general-message alert alert-danger">{{ Session::get('error') }}</div>
-    @endif
+    @endif --}}
 
 	<!--wrapper-->
 	<div class="wrapper">
@@ -55,9 +55,7 @@
 		<!--end overlay-->
 		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
-		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2021. Tất cả các quyền.</p>
-		</footer>
+        @include("admin_dashboard.layouts.footer")
 	</div>
 	<!--end wrapper-->
     <!--start switcher-->

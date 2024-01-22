@@ -27,7 +27,7 @@
 			  
 				<div class="card">
 				  <div class="card-body p-4">
-					  <h5 class="card-title">Thêm bình luận mới</h5>
+					  <h5 class="card-title">Chỉnh sửa bình luận</h5>
 					  <hr/>
 					<form action="{{ route('admin.comments.update', $comment) }}" method="POST" >
 						@csrf

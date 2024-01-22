@@ -1,6 +1,6 @@
 @extends('main_layouts.master')
 
-@section('title','TDQ - Giới thiệu')
+@section('title','ELý - Giới thiệu')
 
 @section('content')
 		
@@ -75,7 +75,7 @@
 	                     <div class="panel panel-default">
 	                         <div class="panel-heading" role="tab" id="headingOne">
 	                             <h4 class="panel-title">
-	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Sứa mạng
+	                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Sứ mệnh
 	                                 </a>
 	                             </h4>
 	                         </div>

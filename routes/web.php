@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,10 +44,9 @@ Route::post('/tai-khoan', [HomeController::class, 'update'])->name('update');
 
 Route::get('/404', [HomeController::class, 'erorr404'])->name('erorrs.404');
 
-Route::post('/tim-kiem', [HomeController::class,'search'])->name('search');
-Route::get('/tin-tuc-moi-nhat', [HomeController::class,'newPost'])->name('newPost');
-Route::get('/tin-nong', [HomeController::class,'hotPost'])->name('hotPost');
-Route::get('/xem-nhieu-nhat', [HomeController::class,'viewPost'])->name('viewPost');
+Route::post('/tim-kiem', [HomeController::class, 'search'])->name('search');
+Route::get('/tin-tuc-moi-nhat', [HomeController::class, 'newPost'])->name('newPost');
+Route::get('/xem-nhieu-nhat', [HomeController::class, 'viewPost'])->name('viewPost');
 
 Route::get('/bai-vet/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
 Route::post('/bai-viet/{post:slug}', [PostsController::class, 'addComment'])->name('posts.add_comment');
@@ -63,29 +63,34 @@ Route::get('/tat-ca-chuyen-muc', [CategoryController::class, 'index'])->name('ca
 
 Route::get('/tu-khoa/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
-Route::post('email',[NewsletterController::class, 'store'])->name('newsletter_store');
-require __DIR__.'/auth.php';
-
+Route::post('email', [NewsletterController::class, 'store'])->name('newsletter_store');
+require __DIR__ . '/auth.php';
 
 // Điều hướng cho trang quản trị admin -
-Route::prefix('admin')->name('admin.')->middleware(['auth','check_permissions'])->group(function(){
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
-    
+
     Route::resource('posts', AdminPostsController::class);
     Route::post('/poststitle', [AdminPostsController::class, 'to_slug'])->name('posts.to_slug');
     Route::resource('categories', AdminCategoriesController::class);
 
-    Route::resource('tags', AdminTagsController::class)->only(['index','show','destroy']);
+    Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
     Route::resource('comments', AdminCommentsController::class)->except('show');
 
     Route::resource('roles', AdminRolesController::class)->except('show');
     Route::resource('users', AdminUsersController::class);
 
-    Route::get('contacts',[AdminContactsController::class, 'index'])->name('contacts');
-    Route::delete('contacts/{contact}',[AdminContactsController::class, 'destroy'])->name('contacts.destroy');
+    Route::get('contacts', [AdminContactsController::class, 'index'])->name('contacts');
+    Route::delete('contacts/{contact}', [AdminContactsController::class, 'destroy'])->name('contacts.destroy');
 
-    Route::get('about',[AdminSettingController::class, 'edit'])->name('setting.edit');
-    Route::post('about',[AdminSettingController::class, 'update'])->name('setting.update');
+    Route::get('about', [AdminSettingController::class, 'edit'])->name('setting.edit');
+    Route::post('about', [AdminSettingController::class, 'update'])->name('setting.update');
 });
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -35,7 +35,7 @@
                     <div class="position-relative">
                         <input type="text" class="form-control ps-5 radius-30" placeholder="Tìm kiếm danh mục"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                     </div>
-                    <div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm danh mục mới</a></div>
+                    <div class="ms-auto"><a href="{{ route('admin.users.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm tài khoản mới</a></div>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0">
@@ -47,7 +47,6 @@
                                 <th>Email</th>
                                 <th>Quyền</th>
                                 <th>Thông tin</th>
-                                <th>Ngày tạo</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -75,9 +74,7 @@
                                 <td>
                                 </td>
                                 @endif
-                             
-                                <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                   
+                                
                                 <td>
                                     <div class="d-flex order-actions">
                                         <a href="{{ route('admin.users.edit', $user)}}" class=""><i class='bx bxs-edit'></i></a>

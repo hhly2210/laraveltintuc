@@ -33,7 +33,6 @@
                             <tr>
                                 <th>Mã quyền</th>
                                 <th>Tên quyền</th>
-                                <th>Ngày tạo</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -51,7 +50,6 @@
                                     </div>
                                 </td>
                                 <td>{{ $role->name }}</td>
-                                <td>{{ $role->created_at->format('d/m/Y') }}</td>
                    
                                 <td>
                                     <div class="d-flex order-actions">

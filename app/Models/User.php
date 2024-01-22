@@ -27,35 +27,40 @@ class User extends Authenticatable
         'role_id',
     ];
 
- 
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
- 
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() {
-        return $this->belongsTo(Role::class);
-    } 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 
-    
-    public function posts() {
+
+    public function posts()
+    {
         return $this->hasMany(Post::class);
-    } 
+    }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    
-    public function image() {
-        return $this->morphOne(Image::class, 'imageable');
-    } 
 
-    public function categories() {
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function categories()
+    {
         return $this->hasMany(Category::class);
-    } 
+    }
 }

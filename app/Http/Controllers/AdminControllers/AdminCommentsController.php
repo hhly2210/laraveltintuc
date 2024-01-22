@@ -10,9 +10,9 @@ use App\Models\Comment;
 class AdminCommentsController extends Controller
 {
     private  $rules = [
-                'post_id' => 'required|numeric',
-                'the_comment' => 'required|min:3|max:1000',
-            ];
+        'post_id' => 'required|numeric',
+        'the_comment' => 'required|min:3|max:1000',
+    ];
 
     public function index()
     {
@@ -24,13 +24,13 @@ class AdminCommentsController extends Controller
 
     public function create()
     {
-        return view('admin_dashboard.comments.create',[
+        return view('admin_dashboard.comments.create', [
             'posts' => Post::pluck('title', 'id'),
         ]);
     }
 
 
- 
+
     public function store(Request $request)
     {
 
@@ -41,10 +41,10 @@ class AdminCommentsController extends Controller
         return redirect()->route('admin.comments.create')->with('success', 'Thêm bình luận mới thành công.');
     }
 
- 
+
     public function edit(Comment $comment)
     {
-        return view('admin_dashboard.comments.edit',[
+        return view('admin_dashboard.comments.edit', [
             'posts' => Post::pluck('title', 'id'),
             'comment' => $comment
         ]);
@@ -54,15 +54,15 @@ class AdminCommentsController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $validated = $request->validate($this->rules);
- 
+
         $comment->update($validated);
-        return redirect()->route('admin.comments.edit',$comment)->with('success', 'Sửa bình luận mới thành công.');
+        return redirect()->route('admin.comments.edit', $comment)->with('success', 'Sửa bình luận thành công.');
     }
 
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return redirect()->route('admin.comments.index')->with('success', 'Xóa bình luận mới thành công.');
+        return redirect()->route('admin.comments.index')->with('success', 'Xóa bình luận thành công.');
     }
 }

@@ -8,7 +8,7 @@
     <!-- Ad Widget Start -->
     <div class="ad--widget--banner">
         <a href="https://mwc.com.vn/products/giay-sandal-nu-mwc-nusd--2887?c=N%C3%82U">
-            <img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}" alt="">
+            <img src="{{ asset('kcnew/frontend/img/ads-img/ads.jpg') }}" alt="">
         </a>
     </div>
     <!-- Ad Widget End -->

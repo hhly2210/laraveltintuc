@@ -35,7 +35,6 @@
                                 <th>Tên bài viết</th>
                                 <th>Mô tả</th>
                                 <th>Danh mục</th>
-                                <th>Ngày tạo</th>
                                 <th>Trạng thái</th>
                                 <th>Lượt xem</th>
                                 <th>Chức năng</th>
@@ -54,12 +53,11 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $post->title }}</td>
+                                <td class="text-truncate" style="max-width:200px;">{{ $post->title }}</td>
                                
                                 
-                                <td>{{ $post->excerpt }}</td>
+                                <td class="text-truncate" style="max-width:200px;">{{ $post->excerpt }}</td>
                                 <td>{{ $post->category->name }}</td>
-                                <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                 <td>
                                     <div class="badge rounded-pill @if($post->approved === 1)  {{'text-success bg-light-success' }} @else {{'text-danger bg-light-danger' }} @endif p-2 text-uppercase px-3">
                                         <i class='bx bxs-circle me-1'></i>{{ $post->approved  === 1 ? 'Đã phê duyệt' : 'Chưa phê duyệt'  }}

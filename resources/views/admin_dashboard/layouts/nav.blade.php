@@ -17,7 +17,7 @@ function checkPermission($name) {
                     <img src="{{ asset('kcnew/frontend/img/image_iconLogo.png') }}" class="logo-icon" alt="logo icon">
                 </div>
                 <div>
-                    <h4 style="color: #00b249" class="logo-text">TDQ - News</h4>
+                    <h4 style="color: #00b249" class="logo-text">ELý - News</h4>
                 </div>
                 <div style="color: #00b249" class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
             </div>
@@ -28,7 +28,7 @@ function checkPermission($name) {
                 <li>
                     <a href="{{ route('admin.index') }}" >
                     <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
-                    <div class="menu-title">Bảng điều khiển</div>
+                    <div class="menu-title">Bảng thống kê</div>
                     </a>
                 </li>
                 @endif

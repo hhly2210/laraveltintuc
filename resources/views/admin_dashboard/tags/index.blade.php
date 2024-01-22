@@ -33,7 +33,6 @@
                                 <th>Mã từ khóa</th>
                                 <th>Tên từ khóa</th>
                                 <th>Xem chi tiết</th>
-                                <th>Ngày tạo</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
@@ -54,7 +53,7 @@
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="{{ route('admin.tags.show', $tag) }}">Chi tiết bài viết</a>
                                 </td>
-                                <td>{{ $tag->created_at->format('d/m/Y') }}</td>
+                                {{-- <td>{{ $tag->created_at->format('d/m/Y') }}</td> --}}
                    
                                 <td>
                                     <div class="d-flex order-actions">

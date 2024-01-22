@@ -73,7 +73,6 @@ class ContactController extends Controller
             $attributes = $validated->validated();
             Contact::create($attributes);
 
-            // Mail::to("anhtuanlop10a2812001@gmail.com")->send(new ContacMail(
             Mail::to( env('ADMIN_EMAIL') )->send(new ContacMail(
                 $attributes['first_name'],
                 $attributes['last_name'],

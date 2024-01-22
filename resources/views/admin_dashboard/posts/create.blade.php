@@ -1,246 +1,239 @@
-@extends("admin_dashboard.layouts.app")
-@section("style")
-	<!-- <link href="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" /> -->
-	
-	<link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
-	<link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
+@extends('admin_dashboard.layouts.app')
+@section('style')
+    <!-- <link href="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" /> -->
 
-	<link href="{{ asset('admin_dashboard_assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
-	<!-- <style>
-		.imageuploadify{
-			margin: 0;
-			max-width: 100%;
-		}
-	</style> -->
-
-	<script src="https://cdn.tiny.cloud/1/5nk94xe9fcwk22fkp6gou9ymszwidnujnr2mu3n3xe2biap3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="{{ asset('admin_dashboard_assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
 @endsection
-		
-@section("wrapper")
-		<!--start page wrapper -->
-		<div class="page-wrapper">
-			<div class="page-content">
-				<!--breadcrumb-->
-				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Bài viết</div>
-					<div class="ps-3">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb mb-0 p-0">
-								<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
-								</li>
-								<li class="breadcrumb-item active" aria-current="page">Thêm mới bài viết</li>
-							</ol>
-						</nav>
-					</div>
-				</div>
-				<!--end breadcrumb-->
-			  
-				<div class="card">
-				  <div class="card-body p-4">
-					  <h5 class="card-title">Thêm bài viết mới</h5>
-					  <hr/>
-					<form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data" >
-						@csrf
 
-                       <div class="form-body mt-4">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="border border-3 p-4 rounded">
-										<div class="mb-3">
-											<label for="inputProductTitle" class="form-label">Tiêu đề bài viết</label>
-											<input type="text" value=' {{ old("title" ) }}' name="title" required  class="inputPostTitle form-control" id="inputProductTitle" placeholder="Nhập tiêu đề bài viết">
-										
-											@error('title')
-												<p class="text-danger">{{ $message }}</p>
-											@enderror
-										</div>
+@section('wrapper')
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">Bài viết</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i
+                                        class="bx bx-home-alt"></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Thêm mới bài viết</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--end breadcrumb-->
 
-										<div class="mb-3">
-											<label for="inputProductTitle" class="form-label">Slug - liên kết</label>
-											<input type="text" value=' {{ old("slug" ) }}' name="slug" required  class="slugPost form-control" id="inputProductTitle" placeholder="Nhập slug">
-										
-											@error('slug')
-												<p class="text-danger">{{ $message }}</p>
-											@enderror
-										</div>
+            <div class="card">
+                <div class="card-body p-4">
+                    <h5 class="card-title">Thêm bài viết mới</h5>
+                    <hr />
+                    <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-										<div class="mb-3">
-											<label for="inputProductDescription" class="form-label">Mô tả</label>
-											<textarea required name="excerpt" class="form-control" id="inputProductDescription" rows="3">{{ old("excerpt") }}</textarea>
+                        <div class="form-body mt-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="border border-3 p-4 rounded">
+                                        <div class="mb-3">
+                                            <label for="inputProductTitle" class="form-label">Tiêu đề bài viết</label>
+                                            <input type="text" value=' {{ old('title') }}' name="title" required
+                                                class="inputPostTitle form-control" id="inputProductTitle"
+                                                placeholder="Nhập tiêu đề bài viết">
 
-													
-											@error('excerpt')
-												<p class="text-danger">{{ $message }}</p>
-											@enderror
-										
-										</div>
+                                            @error('title')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
 
-										<div class="mb-3">
-											<label for="inputProductTitle" class="form-label">Danh mục bài viết</label>
-												<div class="card">
-													<div class="card-body">
-														<div class="p-3 rounded">
-															<div class="mb-3">
-																<select name="category_id" required class="single-select">
-																	@foreach( $categories as $key => $category )
-																	<option value="{{ $key }}">{{ $category }}</option>
-																	@endforeach
-																</select>
+                                        <div class="mb-3">
+                                            <label for="inputProductTitle" class="form-label">Slug - liên kết</label>
+                                            <input type="text" value=' {{ old('slug') }}' name="slug" required
+                                                class="slugPost form-control" id="inputProductTitle"
+                                                placeholder="Nhập slug">
 
-																@error('category_id')
-																	<p class="text-danger">{{ $message }}</p>
-																@enderror
+                                            @error('slug')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
 
-															</div>
-														</div>
-													</div>
-												</div>
-										</div>
+                                        <div class="mb-3">
+                                            <label for="inputProductDescription" class="form-label">Mô tả</label>
+                                            <textarea required name="excerpt" class="form-control" id="inputProductDescription" rows="3">{{ old('excerpt') }}</textarea>
 
-										<div class="mb-3">
+
+                                            @error('excerpt')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="inputProductTitle" class="form-label">Danh mục bài viết</label>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="p-3 rounded">
+                                                        <div class="mb-3">
+                                                            <select name="category_id" required class="single-select">
+                                                                @foreach ($categories as $key => $category)
+                                                                    <option value="{{ $key }}">
+                                                                        {{ $category }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @error('category_id')
+                                                                <p class="text-danger">{{ $message }}</p>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
                                             <label class="form-label">Từ khóa</label>
                                             <input type="text" class="form-control" name="tags" data-role="tagsinput">
                                         </div>
 
-										<!-- <input id="image-uploadify" name="thumbnail" type="file" id="file" accept="image/*" multiple> -->								
-										<div class="mb-3">
-											<label for="inputProductDescription" class="form-label">Hình ảnh bài viết</label>
-											<input id="thumbnail" require name="thumbnail" type="file" id="file">
-										
-											@error('thumbnail')
-												<p class="text-danger">{{ $message }}</p>
-											@enderror
-										
-										</div>
-										
-										<div class="mb-3">
-											<label for="inputProductDescription" class="form-label">Nội dung bài viết</label>
-											<textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">{{ old("body" ) }}</textarea>
-										
-											@error('body')
-												<p class="text-danger">{{ $message }}</p>
-											@enderror
-										
-										</div>
+                                        <!-- <input id="image-uploadify" name="thumbnail" type="file" id="file" accept="image/*" multiple> -->
+                                        <div class="form-group">
+                                            <div class="mb-3">
+                                                <label for="inputProductDescription" class="form-label">Hình ảnh bài
+                                                    viết</label>
+                                                {{-- <input id="thumbnail" require name="thumbnail" type="file" id="file"> --}}
+                                                <div class="input-group">
+                                                    <button type="button" id="lfm" data-input="thumbnail"
+                                                        data-preview="holder" class="btn btn-primary">Thêm
+                                                        ảnh</button>
+                                                    <input type="text" class="form-control" name="thumbnail"
+                                                        id="thumbnail" required>
+                                                </div>
+                                                @error('thumbnail')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
 
-										<button class="btn btn-primary" type="submit">Thêm bài viết</button>
+                                            </div>
+                                            <div id="holder" style="margin-top:15px;max-height:100px;">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="inputProductDescription" class="form-label">Nội dung bài
+                                                viết</label>
+                                            <textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">{{ old('body') }}</textarea>
 
-									</div>
-								</div>
-							</div>
-						</div>
+                                            @error('body')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
 
-					</form>
-				  </div>
-			  </div>
+                                        </div>
+
+                                        <button class="btn btn-primary" type="submit">Thêm bài viết</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
 
 
-			</div>
-		</div>
-		<!--end page wrapper -->
+        </div>
+    </div>
+    <!--end page wrapper -->
 @endsection
-	
-@section("script")
-	<!-- <script src="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script> -->
-	<script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>
-	<script src="{{ asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js') }}"></script>
-	<script>
-		$(document).ready(function () {
-			// $('#image-uploadify').imageuploadify();
 
-			$('.single-select').select2({
-			theme: 'bootstrap4',
-			width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-			placeholder: $(this).data('placeholder'),
-			allowClear: Boolean($(this).data('allow-clear')),
-			});
-			
-			$('.multiple-select').select2({
-				theme: 'bootstrap4',
-				width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-				placeholder: $(this).data('placeholder'),
-				allowClear: Boolean($(this).data('allow-clear')),
-			});
+@section('script')
+    <!-- <script src="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script> -->
+    <script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    {{-- Button --}}
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script src="/vendor/laravel-filemanager/js/filemanager.min.js"></script>
+    <script src="{{ asset('/js/plugins/jquery-ui-1.13.2/jquery-ui.min.js') }}"></script>
+    <script>
+        var route_prefix = "/laravel-filemanager";
+        $('#lfm').filemanager('image', {
+            prefix: route_prefix,
+        });
+    </script>
+    {{-- End Button --}}
+    <script>
+        $(document).ready(function() {
+            // $('#image-uploadify').imageuploadify();
 
-			tinymce.init({
-			selector: '#post_content',
-			// plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',
-			plugins: 'advlist autolink lists link image media charmap preview anchor pagebreak',
-			toolbar_mode: 'floating',
-			height: '500',
+            $('.single-select').select2({
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
+                    'style',
+                placeholder: $(this).data('placeholder'),
+                allowClear: Boolean($(this).data('allow-clear')),
+            });
 
-			toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code | rtl ltr',
-			toolbar_mode: 'floating',
+            $('.multiple-select').select2({
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
+                    'style',
+                placeholder: $(this).data('placeholder'),
+                allowClear: Boolean($(this).data('allow-clear')),
+            });
 
-			image_title: true,
-			automatic_uploads: true,
+            setTimeout(() => {
+                $(".general-message").fadeOut();
+            }, 5000);
 
-			images_upload_handler: function(blobinfo, success, failure){
-				let formData = new FormData();
-				let _token = $("input[name='_token']").val();
-				let xhr = new XMLHttpRequest();
-				xhr.open('post', "{{ route('admin.upload_tinymce_image') }}");
-				xhr.onload = () => {
-					if(xhr.status !== 200) {
-						failure("Http Error: " + xhr.status);
-						return 
-					}
-					let json = JSON.parse(xhr.responseText);
-					if(! json || typeof json.location != 'string'){
-						failure("Invalid JSON: " + xhr.responseText);
-						return
-					}
-					success(json.location);
+        });
+    </script>
 
-				}
+    <script>
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+    </script>
 
-				formData.append('_token', _token);
-				formData.append('file', blobinfo.blob(), blobinfo.filename());
-				xhr.send(formData) ;
-			}
-			
-		});
+    <script>
+        CKEDITOR.replace('post_content', options);
+    </script>
 
-		setTimeout(()=>{
-				$(".general-message").fadeOut();
-		},5000);
+    <script>
+        $(document).on('change', '.inputPostTitle', (e) => {
+            e.preventDefault();
 
-		});
+            let $this = e.target;
 
+            let csrf_token = $($this).parents("form").find("input[name='_token']").val();
+            let titlePost = $($this).parents("form").find("input[name='title']").val();
 
-	</script>
+            let formData = new FormData();
+            formData.append('_token', csrf_token);
+            formData.append('title', titlePost);
 
-<script>
-	$(document).on('change', '.inputPostTitle', (e) => {
-		e.preventDefault();
+            $.ajax({
+                url: "{{ route('admin.posts.to_slug') }}",
+                data: formData,
+                type: 'POST',
+                dataType: 'JSON',
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.success) {
+                        $('.slugPost').val(data.message);
 
-		let $this = e.target;
-
-		let csrf_token = $($this).parents("form").find("input[name='_token']").val();
-		let titlePost =  $($this).parents("form").find("input[name='title']").val();
-		
-		let formData = new FormData();
-		formData.append('_token', csrf_token);
-		formData.append('title', titlePost);
-		
-		$.ajax({
-			url: "{{ route('admin.posts.to_slug') }}",
-			data: formData,
-			type: 'POST',
-			dataType: 'JSON',
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				if(data.success){
-					$('.slugPost').val(data.message);
-
-				}else{
-					alert("Bị lỗi khi nhập title !")
-				}
-			}
-		})
-	})
-</script>
-
+                    } else {
+                        alert("Bị lỗi khi nhập title !")
+                    }
+                }
+            })
+        })
+    </script>
 @endsection

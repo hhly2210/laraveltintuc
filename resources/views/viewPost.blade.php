@@ -1,5 +1,5 @@
 @extends('main_layouts.master')
-@section('title','TDQ - Xem Nhiều Nhất')
+@section('title','ELý - Xem Nhiều Nhất')
 
 @section('content')
   <!-- Main Breadcrumb Start -->
@@ -36,7 +36,7 @@
                                                             <div class="post--img">
                                                                 <a href="{{ route('posts.show', $viewPosts_category[$i] ) }}"
                                                                     class="thumb"><img
-                                                                        src="{{ asset($viewPosts_category[$i]->image ? 'storage/' . $viewPosts_category[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
+                                                                        src="{{ asset($viewPosts_category[$i]->thumbnail)}}"
                                                                         alt=""></a>
                                                                 <a href="{{ route('categories.show', $viewPosts_category[$i]->category) }}"
                                                                     class="cat">{{ $viewPosts_category[$i]->category->name }}</a>

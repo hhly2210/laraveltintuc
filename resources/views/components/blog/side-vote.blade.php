@@ -1,5 +1,5 @@
  <!-- Widget Start -->
- <div class="widget">
+ {{-- <div class="widget">
     <div class="widget--title" data-ajax="tab">
         <h2 class="h4">Bình chọn</h2>
 
@@ -21,7 +21,7 @@
         <ul class="nav" data-ajax-content="inner">
             <li class="title">
                 <h3 class="h4">
-                    Theo bạn thì giải đội bóng nào sẽ vô địch WoldCup 2022 ?</h3>
+                    </h3>
             </li>
 
             <li class="options">
@@ -77,5 +77,5 @@
         <!-- Preloader End -->
     </div>
     <!-- Poll Widget End -->
-</div>
+</div> --}}
 <!-- Widget End -->
