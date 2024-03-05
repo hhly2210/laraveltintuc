@@ -124,11 +124,9 @@
                                                                         data-input="thumbnail" data-preview="holder"
                                                                         class="btn btn-primary">Thêm ảnh</button>
                                                                 </div> --}}
-                                                                
-                                                                <input type="text" class="form-control" id="lfm"
-                                                                    name="thumbnail"
-                                                                    value="{{ $post->thumbnail }}"
-                                                                    id="thumbnail">
+
+                                                                <input type="text" class="form-control" id="thumbnail"
+                                                                    name="thumbnail" value="{{ $post->thumbnail }}">
                                                             </div>
                                                             @error('thumbnail')
                                                                 <p class="text-danger">{{ $message }}</p>
@@ -139,7 +137,7 @@
 
                                                 <div id="holder" class="col-md-7 text-center">
                                                     <img id="holder" style="width: 25%; border-radius: 16px;"
-                                                        src="{{ $post->thumbnail ? : 'placeholders/placeholder-image.jpg' }}"
+                                                        src="{{ $post->thumbnail ?: 'placeholders/placeholder-image.jpg' }}"
                                                         class="img-responsive" alt="All thumbnail">
                                                 </div>
                                             </div>

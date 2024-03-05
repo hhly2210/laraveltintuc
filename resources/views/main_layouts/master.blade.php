@@ -2,11 +2,7 @@
 use Carbon\Carbon;
 use App\Models\Category;
 $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
-$categoryFooter = Category::where('name', '!=', 'Chưa phân loại')
-    ->withCount('posts')
-    ->orderBy('created_at', 'DESC')
-    ->take(12)
-    ->get();
+$categoryFooter = Category::where('name', '!=', 'Chưa phân loại')->withCount('posts')->orderBy('created_at', 'DESC')->take(12)->get();
 
 ?>
 
@@ -369,7 +365,7 @@ $categoryFooter = Category::where('name', '!=', 'Chưa phân loại')
                         </a>
                     </p>
                     <p>
-                        <span style="font-size: 14px" class="block">Báo tiếng Việt nhiều người xem nhất</span>
+                        <span style="font-size: 14px" class="block">Báo tiếng Việt</span>
                     </p>
                     <p>
                         <span style="font-size: 14px" class="block">Thuộc Viện Kỹ thuật & Công nghệ</span>

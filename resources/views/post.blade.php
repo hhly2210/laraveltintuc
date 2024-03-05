@@ -270,10 +270,6 @@
                         <!-- Widget End -->
 
                         <!-- Widget Start -->
-                        <x-blog.side-vote />
-                        <!-- Widget End -->
-
-                        <!-- Widget Start -->
                         <x-blog.side-ad_banner />
                         <!-- Widget End -->
 

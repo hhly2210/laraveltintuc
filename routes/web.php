@@ -91,6 +91,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::post('about', [AdminSettingController::class, 'update'])->name('setting.update');
 });
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

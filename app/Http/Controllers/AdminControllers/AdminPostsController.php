@@ -44,24 +44,6 @@ class AdminPostsController extends Controller
         try {
             $post = Post::create($validated);
 
-            // if ($request->has('thumbnail')) {
-            //     $thumbnail = $request->file('thumbnail');
-            //     if ($thumbnail) {
-            //         // $filename = $thumbnail->getClientOriginalName();
-            //         $filename = pathinfo($thumbnail->getClientOriginalName(), PATHINFO_FILENAME);
-            //         $file_extension = $thumbnail->getClientOriginalExtension();
-            //         $path   = $thumbnail->store('images', 'public');
-
-            //         $post->image()->create([
-            //             'name' => $filename,
-            //             'extension' => $file_extension,
-            //             'path' => $path
-            //         ]);
-            //     } else {
-            //         return back()->with('error', 'Không có tệp ảnh hợp lệ được gửi lên.');
-            //     }
-            // }
-
             $tags = explode(',', $request->input('tags'));
             $tags_ids = [];
             foreach ($tags as $tag) {
@@ -72,24 +54,9 @@ class AdminPostsController extends Controller
             if (count($tags_ids) > 0)
                 $post->tags()->sync($tags_ids);
 
-            // $tags = explode(',', $request->input('tags'));
-            // $tags_ids = [];
-            // foreach ($tags as $tag) {
-
-            //     $tag_exits = $post->tags()->where('name', trim($tag))->count();
-            //     if( $tag_exits == 0){
-            //         $tag_ob = Tag::create(['name'=> $tag]);
-            //         $tags_ids[]  = $tag_ob->id;
-            //     }
-
-            // }
-
-            // if (count($tags_ids) > 0)
-            //     $post->tags()->syncWithoutDetaching( $tags_ids );
-
             return redirect()->route('admin.posts.create')->with('success', 'Thêm bài viết thành công.');
         } catch (\Exception $th) {
-            // $th;
+            $th;
             return back()->with('error', 'Đã có lỗi xảy ra vui lòng thử lại sau.');
         }
     }
@@ -116,44 +83,32 @@ class AdminPostsController extends Controller
         ]);
     }
 
-
     public function update(Request $request, Post $post)
     {
-        $this->rules['thumbnail'] = 'nullable|file||mimes:jpg,png,webp,svg,jpeg|dimensions:max-width:800,max-height:300';
         $validated = $request->validate($this->rules);
         $validated['approved'] = $request->input('approved') !== null;
-        $post->update($validated);
+        try {
+            $post->update($validated);
 
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            // $filename = $thumbnail->getClientOriginalName();
-            $filename = $thumbnail;
-            // $file_extension = $thumbnail->getClientOriginalExtension();
-            $file_extension = $thumbnail;
-            $path   = $thumbnail->store('images', 'public');
+            $tags = explode(',', $request->input('tags'));
+            $tags_ids = [];
+            foreach ($tags as $tag) {
 
-            $post->image()->update([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path
-            ]);
-        }
-
-        $tags = explode(',', $request->input('tags'));
-        $tags_ids = [];
-        foreach ($tags as $tag) {
-
-            $tag_exits = $post->tags()->where('name', trim($tag))->count();
-            if ($tag_exits == 0) {
-                $tag_ob = Tag::create(['name' => $tag]);
-                $tags_ids[]  = $tag_ob->id;
+                $tag_exits = $post->tags()->where('name', trim($tag))->count();
+                if ($tag_exits == 0) {
+                    $tag_ob = Tag::create(['name' => $tag]);
+                    $tags_ids[]  = $tag_ob->id;
+                }
             }
+
+            if (count($tags_ids) > 0)
+                $post->tags()->syncWithoutDetaching($tags_ids);
+
+            return redirect()->route('admin.posts.edit', $post)->with('success', 'Sửa viết thành công.');
+        } catch (\Exception $th) {
+            // $th;
+            return back()->with('error', 'Đã có lỗi xảy ra vui lòng thử lại sau.');
         }
-
-        if (count($tags_ids) > 0)
-            $post->tags()->syncWithoutDetaching($tags_ids);
-
-        return redirect()->route('admin.posts.edit', $post)->with('success', 'Sửa viết thành công.');
     }
 
     public function destroy(Post $post)

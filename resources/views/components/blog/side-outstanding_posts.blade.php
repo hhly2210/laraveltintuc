@@ -1,16 +1,16 @@
-<?php 
-use App\Models\Post;
-use App\Models\Category;
+@php
+    use App\Models\Post;
+    use App\Models\Category;
 
     // Mới nhất
     $recent_posts = Post::latest()->take(5)->get();
     // Xem nhiều nhất
-    $outstanding_posts_views =  Post::approved()->orderBy('views','DESC')->take(5)->get();
-    
- ?>
+    $outstanding_posts_views = Post::approved()->orderBy('views', 'DESC')->take(5)->get();
 
-@props(['outstanding_posts'] )
-   <!-- Widget Start -->
+@endphp
+
+@props(['outstanding_posts'])
+<!-- Widget Start -->
 <div class="widget">
     <div class="widget--title">
         <h2 class="h4">Tin tức nổi bật</h2>
@@ -25,7 +25,8 @@ use App\Models\Category;
                     <a class="outstandPosts" href="" data-ajax-action="load_widget_trendy_news">Mới nhất</a>
                 </li>
                 <li>
-                    <a class="outstandPosts" href="" data-ajax-action="load_widget_most_watched">Xem nhiều nhất</a>
+                    <a class="outstandPosts" href="" data-ajax-action="load_widget_most_watched">Xem nhiều
+                        nhất</a>
                 </li>
             </ul>
         </div>
@@ -33,24 +34,28 @@ use App\Models\Category;
         <!-- Post Items Start -->
         <div class="post--items post--items-3" data-ajax-content="outer">
             <ul class="nav listPost" data-ajax-content="inner">
-                @foreach($recent_posts as $recent_post)
+                @foreach ($recent_posts as $recent_post)
                     <li>
                         <!-- Post Item Start -->
                         <div class="post--item post--layout-3">
                             <div class="post--img">
                                 <a href="{{ route('posts.show', $recent_post) }}" class="thumb"><img
-                                        src="{{ asset($recent_post->thumbnail)}}"
+                                        src="{{ asset($recent_post->thumbnail) }}" style="height: 70px;"
                                         alt=""></a>
                                 <div class="post--info">
                                     <ul class="nav meta">
-                                        <li><a href="javascript:;">{{ $recent_post->created_at->locale('vi')->diffForHumans() }}</a></li>
-                                        <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($recent_post->comments) }}</a></li>
+                                        <li><a
+                                                href="javascript:;">{{ $recent_post->created_at->locale('vi')->diffForHumans() }}</a>
+                                        </li>
+                                        <li><a href="javascript:;"><i
+                                                    class="fa fm fa-comments"></i>{{ count($recent_post->comments) }}</a>
+                                        </li>
                                         <li><span><i class="fa fm fa-eye"></i>{{ $recent_post->views }}</span></li>
                                     </ul>
 
                                     <div class="title">
                                         <h3 class="h4"><a href="{{ route('posts.show', $recent_post) }}"
-                                                class="btn-link">{{ $recent_post->title}}</a>
+                                                class="btn-link">{{ $recent_post->title }}</a>
                                         </h3>
                                     </div>
                                 </div>
@@ -58,8 +63,8 @@ use App\Models\Category;
                         </div>
                         <!-- Post Item End -->
                     </li>
-                    @endforeach
-                </ul>
+                @endforeach
+            </ul>
 
             <!-- Preloader Start -->
             <!-- <div class="preloader bg--color-0--b" data-preloader="1">
@@ -74,30 +79,29 @@ use App\Models\Category;
 <!-- Widget End -->
 
 @section('custom_js')
+    <script>
+        setTimeout(() => {
+            $(".global-message").fadeOut();
+        }, 5000)
+    </script>
 
-<script>
-	setTimeout(() => {
-		$(".global-message").fadeOut();
-	}, 5000)
-</script>
-
-<script>
+    <script>
         const outstandPosts = document.querySelectorAll('.outstandPosts');
-        outstandPosts.forEach((item, index)=>{
-            $(item).click(function(e){
+        outstandPosts.forEach((item, index) => {
+            $(item).click(function(e) {
 
-                const ListPost=  $('.listPost');
+                const ListPost = $('.listPost');
                 const ListPost_item = $('.listPost li');
                 ListPost_item.remove();
-                if(index==0){
-                    const htmls  = (() =>{
-                    return `
-                        @foreach($recent_posts as $recent_post)
+                if (index == 0) {
+                    const htmls = (() => {
+                        return `
+                        @foreach ($recent_posts as $recent_post)
                             <li>
                                 <div class="post--item post--layout-3">
                                     <div class="post--img">
                                         <a href="{{ route('posts.show', $recent_post) }}" class="thumb"><img
-                                                src="{{ asset($recent_post->thumbnail)}}"
+                                                src="{{ asset($recent_post->thumbnail) }}"
                                                 alt=""></a>
                                         <div class="post--info">
                                             <ul class="nav meta">
@@ -108,7 +112,7 @@ use App\Models\Category;
 
                                             <div class="title">
                                                 <h3 class="h4"><a href="{{ route('posts.show', $recent_post) }}"
-                                                        class="btn-link">{{ $recent_post->title}}</a>
+                                                        class="btn-link">{{ $recent_post->title }}</a>
                                                 </h3>
                                             </div>
                                         </div>
@@ -117,18 +121,18 @@ use App\Models\Category;
                             </li>
                         @endforeach
                     `
-                        });
+                    });
                     ListPost.append(htmls);
                 }
-                if(index==1){
-                    const htmls  = (() =>{
-                    return `
-                         @foreach($outstanding_posts_views as $outstanding_posts_view)
+                if (index == 1) {
+                    const htmls = (() => {
+                        return `
+                         @foreach ($outstanding_posts_views as $outstanding_posts_view)
                             <li>
                                 <div class="post--item post--layout-3">
                                     <div class="post--img">
                                         <a href="{{ route('posts.show', $outstanding_posts_view) }}" class="thumb"><img
-                                                src="{{ asset($outstanding_posts_view->thumbnail)}}"
+                                                src="{{ asset($outstanding_posts_view->thumbnail) }}"
                                                 alt=""></a>
                                         <div class="post--info">
                                             <ul class="nav meta">
@@ -139,7 +143,7 @@ use App\Models\Category;
 
                                             <div class="title">
                                                 <h3 class="h4"><a href="{{ route('posts.show', $outstanding_posts_view) }}"
-                                                        class="btn-link">{{ $outstanding_posts_view->title}}</a>
+                                                        class="btn-link">{{ $outstanding_posts_view->title }}</a>
                                                 </h3>
                                             </div>
                                         </div>
@@ -148,58 +152,58 @@ use App\Models\Category;
                             </li>
                         @endforeach
                     `
-                        });
+                    });
                     ListPost.append(htmls);
                 }
 
 
             });
         });
-</script>
+    </script>
 
-<script>
-	$(document).on('click', '.send-comment-btn', (e) => {
-		e.preventDefault();
-		let $this = e.target;
+    <script>
+        $(document).on('click', '.send-comment-btn', (e) => {
+            e.preventDefault();
+            let $this = e.target;
 
-		let csrf_token = $($this).parents("form").find("input[name='_token']").val();
-		let the_comment =  $($this).parents("form").find("textarea[name='the_comment']").val();
-		let post_title =  $('.post_title').text() ; 
+            let csrf_token = $($this).parents("form").find("input[name='_token']").val();
+            let the_comment = $($this).parents("form").find("textarea[name='the_comment']").val();
+            let post_title = $('.post_title').text();
 
-		let count_comment =  $('.post_count_comment').text() ; 
-        let ListComment = $('.comment--items');
+            let count_comment = $('.post_count_comment').text();
+            let ListComment = $('.comment--items');
 
-		let formData = new FormData();
-		formData.append('_token', csrf_token);
-		formData.append('the_comment', the_comment);
-		formData.append('post_title', post_title);
-	
+            let formData = new FormData();
+            formData.append('_token', csrf_token);
+            formData.append('the_comment', the_comment);
+            formData.append('post_title', post_title);
 
 
-		$.ajax({
-			url: "{{ route('posts.addCommentUser') }}",
-			data: formData,
-			type: 'POST',
-			dataType: 'JSON',
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				if(data.success){
 
-                    console.log(data.result);
-                  
-                    // Xử lý thêm comment vào bài viết tạm thời
-                    count_comment = Number(count_comment) + 1;
-                    $('.comment_error').text('');
+            $.ajax({
+                url: "{{ route('posts.addCommentUser') }}",
+                data: formData,
+                type: 'POST',
+                dataType: 'JSON',
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.success) {
 
-                    $('.post_count_comment').text(count_comment);
-                    const htmls  = (() =>{
-                    return `
+                        console.log(data.result);
+
+                        // Xử lý thêm comment vào bài viết tạm thời
+                        count_comment = Number(count_comment) + 1;
+                        $('.comment_error').text('');
+
+                        $('.post_count_comment').text(count_comment);
+                        const htmls = (() => {
+                            return `
                             @auth
                                 <li>
                                     <div class="comment--item clearfix">
                                         <div class="comment--img float--left">
-                                            <img style="border-radius: 50%; margin: auto; background-size: cover ;  width: 68px; height: 68px;   background-image: url({{ auth()->user()->image ?  asset('storage/' . auth()->user()->image->path) : asset('storage/placeholders/user_placeholder.jpg') }})"  alt="">
+                                            <img style="border-radius: 50%; margin: auto; background-size: cover ;  width: 68px; height: 68px;   background-image: url({{ auth()->user()->image ? asset('storage/' . auth()->user()->image->path) : asset('storage/placeholders/user_placeholder.jpg') }})"  alt="">
                                         </div>
                                         <div class="comment--info">
                                             <div class="comment--header clearfix">
@@ -219,27 +223,26 @@ use App\Models\Category;
                             @endauth
                         `
                         });
-                    ListComment.append(htmls);
+                        ListComment.append(htmls);
 
 
-					$('.global-message').addClass('alert alert-info');
-					$('.global-message').fadeIn();
-					$('.global-message').text(data.message);
+                        $('.global-message').addClass('alert alert-info');
+                        $('.global-message').fadeIn();
+                        $('.global-message').text(data.message);
 
-					clearData( $($this).parents("form"), [
-						'the_comment',
-					]);
+                        clearData($($this).parents("form"), [
+                            'the_comment',
+                        ]);
 
-					setTimeout(() => {
-						$(".global-message").fadeOut();
-					}, 5000)
+                        setTimeout(() => {
+                            $(".global-message").fadeOut();
+                        }, 5000)
 
-				}else{
-                    $('.comment_error').text(data.errors);
-				}
-			}
-		})
-	})
-</script>
-
+                    } else {
+                        $('.comment_error').text(data.errors);
+                    }
+                }
+            })
+        })
+    </script>
 @endsection

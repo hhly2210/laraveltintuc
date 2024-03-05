@@ -17,7 +17,7 @@
 										<p><span><i class="icon-location-2"></i></span> Viện Kỹ Thuật Công Nghệ, <br>Trường Đại Học Vinh</p>
 									</div>
 									<div class="con-info">
-										<p><span><i class="icon-phone3"></i></span> <a href="tel://1234567920">(+84) 867 871 304</a></p>
+										<p><span><i class="icon-phone3"></i></span> <a href="tel://1234567920">(+84) 867 871 ***</a></p>
 									</div>
 									<div class="con-info">
 										<p><span><i class="icon-paperplane"></i></span> <a href="mailto:vinhuni@gmail.com">ELýnews@gmail.com</a></p>

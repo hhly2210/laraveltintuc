@@ -32,15 +32,14 @@ class HomeController extends Controller
 
     public function index()
     {
-
+        // phân trang 8 bài
         $posts = Post::latest()
             ->approved()
-            // where('approved',1)
             ->withCount('comments')->paginate(8);
-        // phân trang 8 bài
+
         $recent_posts = Post::latest()->take(5)->get();
+
         $categories = Category::where('name', '!=', 'Chưa phân loại')->orderBy('created_at', 'DESC')->take(10)->get();
-        // $categories = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
 
@@ -66,7 +65,7 @@ class HomeController extends Controller
             ->take(1)->get();
 
         // Lấy ra tin nổi bật -- Lấy theo views
-        $outstanding_posts = Post::orderBy('views', 'DESC')->take(5)->get();
+        $outstanding_posts = Post::where('approved', true)->orderBy('views', 'DESC')->take(5)->get();
 
         // Lấy ra tất cả danh mục tin tức 
         $stt_home = 0;

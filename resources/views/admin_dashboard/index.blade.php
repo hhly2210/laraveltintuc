@@ -55,7 +55,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0 text-secondary">Tổng khách hàng</p>
+                                    <p class="mb-0 text-secondary">Tổng người dùng</p>
                                     <h4 class="my-1 text-warning">{{ $countUser }}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
@@ -72,50 +72,15 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h6 class="mb-0">Biểu đồ lượt xem</h6>
-                                </div>
-                                <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        </li>
-                                    </ul>
+                                    <h6 class="mb-0">Biểu đồ thống kê tháng trước</h6>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center ms-auto font-13 gap-2 my-3">
                                 <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i>Số đã người đọc</span>
-                                <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i>Số người đã bình luận</span>
+                                <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i>Số bài viết</span>
                             </div>
                             <div class="chart-container-1">
                                 <canvas id="chart1"></canvas>
-                            </div>
-                        </div>
-                        <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">24.15M</h5>
-                                    <small class="mb-0">Overall Visitor <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">12:38</h5>
-                                    <small class="mb-0">Visitor Duration <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">639.82</h5>
-                                    <small class="mb-0">Pages/Visit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -200,10 +165,10 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                labels: ['16/06/2023', '17/06/2023', '18/06/2023', '19/06/2023', '20/06/2023', '21/06/2023', '22/06/2023'],
+                    labels: {!! json_encode($postsData['labels']) !!},
                 datasets: [{
                     label: 'Lượt xem',
-                    data: [ 10, 13, 9,16, 10, 12,15],
+                    data: {!! json_encode($postsData['views']) !!},
                     borderColor: gradientStroke1,
                     backgroundColor: gradientStroke1,
                     hoverBackgroundColor: gradientStroke1,
@@ -211,8 +176,8 @@
                     fill: false,
                     borderWidth: 0
                 }, {
-                    label: 'Bình luận',
-                    data: [ 8, 14, 19, 12, 7, 18, 8],
+                    label: 'Bài viết',
+                    data: {!! json_encode($postsData['posts']) !!},
                     borderColor: gradientStroke2,
                     backgroundColor: gradientStroke2,
                     hoverBackgroundColor: gradientStroke2,

@@ -33,7 +33,7 @@ class CategoryController extends Controller
                       ->take(1)->get();
 
         return view('categories.index', [
-            'categories' => $categories = Category::where('name','!=','Chưa phân loại')->orderBy('created_at','DESC')->take(10)->get(),
+            'categories' => Category::where('name','!=','Chưa phân loại')->orderBy('created_at','DESC')->take(10)->get(),
             'category_all' => Category::where('name','!=','Chưa phân loại')->orderBy('created_at','DESC')->withCount('posts')->paginate(100),
             'posts_new' => $posts_new,
       
